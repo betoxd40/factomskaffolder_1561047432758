@@ -1,7 +1,7 @@
 // Import Sequelize
 import Sequelize from "sequelize";
 import InitSchema from "../models/schema_factomskaffolder_db";
-import UserModel from "../models/factomskaffolder_db/UserModel";
+import UserModel from "../models/Factomskaffolder_db/UserModel";
 
 // Logging
 import Logger from "./Logger";

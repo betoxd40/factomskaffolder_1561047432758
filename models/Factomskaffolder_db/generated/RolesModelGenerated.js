@@ -48,7 +48,7 @@
  */
 // Database
 import Database from "../../../classes/Database_Factomskaffolder_db";
-import Sequelize from "Sequelize";
+import Sequelize from "sequelize";
 
 // Logger
 import Logger from "../../../classes/Logger";

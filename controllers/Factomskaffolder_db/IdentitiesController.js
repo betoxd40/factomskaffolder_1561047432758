@@ -17,6 +17,8 @@ const generatedControllers = {
    */
   init: router => {
     const baseUrl = `${Properties.api}/identities`;
+    router.post(baseUrl + "", generatedControllers.create);
+    router.get(baseUrl + "", generatedControllers.list);
   },
 
 
@@ -29,16 +31,28 @@ const generatedControllers = {
   */
   create: async (req, res) => {
     try {
-      const result = await UserModel.create(req.body);
+      const result = await IdentitiesModel.create(req.body);
       res.json(result);
     } catch (err) {
       const safeErr = ErrorManager.getSafeError(err);
       res.status(safeErr.status).json(safeErr);
     }
   },
-
-
-  // Custom APIs
+  
+  /**
+  * UserModel.list
+  *   @description CRUD ACTION list
+  *
+  */
+ list: async (req, res) => {
+    try {
+      const result = await IdentitiesModel.list();
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
 
 };
 

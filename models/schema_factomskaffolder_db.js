@@ -72,7 +72,7 @@ export default init => {
       },
       
       key_pairs: {
-        type: Custom
+        type: Sequelize.STRING
       },
       
       stage: {
@@ -87,7 +87,7 @@ export default init => {
       /*
       */
     },
-      { sequelize, tableName: "identities", timestamps: false }
+      { sequelize, tableName: "identities", modelName: "Identities", timestamps: false }
     );
 
 
@@ -134,7 +134,7 @@ export default init => {
       /*
       */
     },
-      { sequelize, tableName: "user", timestamps: false }
+      { sequelize, tableName: "user", modelName: "User", timestamps: false }
     );
 
 
@@ -184,7 +184,7 @@ export default init => {
       /*
       */
     },
-      { sequelize, tableName: "roles", timestamps: false }
+      { sequelize, tableName: "roles", modelName: "Roles", timestamps: false }
     );
 
     User.hasMany(Roles, {

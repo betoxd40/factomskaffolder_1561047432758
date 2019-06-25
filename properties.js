@@ -2,17 +2,17 @@ module.exports = {
 	factomskaffolder_db: {
         name: "factomskaffolder_db",
         user: "root",
-        password: "yanes6514",
+        password: "password",
         host: "localhost",
         port: 3306,
         dialect: "mysql"
     },
     
     factomConfig: {
-        baseUrl: "YOUR API URL",
+        baseUrl: "https://matisse.api.factom.com/v1",
         accessToken: {
-            appId: "YOUR APP ID",
-            appKey: "YOUR APP KEY"
+            appId: "6b920ff0",
+            appKey: "f38a6298bd0515154174fc4fbfdbeb43"
         },
     },
 

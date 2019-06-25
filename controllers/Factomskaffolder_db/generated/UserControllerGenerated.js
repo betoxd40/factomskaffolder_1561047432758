@@ -62,7 +62,7 @@ const generatedControllers = {
     router.post(baseUrl + "", authorize([]), UserController.create);
     router.delete(baseUrl + "/:id", authorize([]), UserController.delete);
     router.get(baseUrl + "/:id", authorize([]), UserController.get);
-    router.get(baseUrl + "", authorize([]), UserController.list);
+    router.get(baseUrl + "", UserController.list);
     router.post(baseUrl + "/:id", authorize([]), UserController.update);
   },
 
