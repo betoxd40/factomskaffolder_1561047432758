@@ -97,7 +97,7 @@ export default init => {
       /*
       */
     },
-      { sequelize, tableName: "doctor", timestamps: false }
+      { sequelize, tableName: "doctor", timestamps: false, modelName: "Doctor" }
     );
 
 
@@ -126,7 +126,7 @@ export default init => {
       },
       
       key_pairs: {
-        type: Custom
+        type: Sequelize.STRING, 
       },
       
       stage: {
@@ -149,7 +149,7 @@ export default init => {
       },
       */
     },
-      { sequelize, tableName: "identity", timestamps: false }
+      { sequelize, tableName: "identity", timestamps: false, modelName: "Identity" }
     );
 
 
@@ -203,7 +203,7 @@ export default init => {
       },
       */
     },
-      { sequelize, tableName: "patient", timestamps: false }
+      { sequelize, tableName: "patient", timestamps: false, modelName: "Patient" }
     );
 
 
@@ -233,7 +233,7 @@ export default init => {
       /*
       */
     },
-      { sequelize, tableName: "report", timestamps: false }
+      { sequelize, tableName: "report", timestamps: false, modelName: "Report" }
     );
 
 
@@ -280,7 +280,7 @@ export default init => {
       /*
       */
     },
-      { sequelize, tableName: "user", timestamps: false }
+      { sequelize, tableName: "user", timestamps: false, modelName: "User" }
     );
 
 
@@ -295,10 +295,10 @@ export default init => {
     
     
     Report.belongsToMany(Patient, {
-        through: "Report_patient",
+        through: "report_patient",
         as: "patient",
-        foreignKey: "id_Report",
-        otherKey: "id_Patient",
+        foreignKey: "id_report",
+        otherKey: "id_patient",
         timestamps: false
     });
 

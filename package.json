@@ -27,6 +27,7 @@
     "sequelize": "^5.8.6",
     "swagger-ui-express": "^2.0.15",
     "tracer": "^0.8.9",
+    "uuid": "^3.3.2",
     "winston": "^3.2.1",
     "yamljs": "^0.3.0"
   },
