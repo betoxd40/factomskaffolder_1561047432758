@@ -48,7 +48,7 @@
  */
 // Database
 import Database from "../../../classes/Database_Factomskaffolder_db";
-import Sequelize from "sequelize";
+import Sequelize from "Sequelize";
 import RolesModel from "../RolesModel";
 
 // Logger
@@ -175,6 +175,9 @@ const generatedModel = {
     return result;
   },
   
+
+
+
   // Start custom queries User
 
   /**

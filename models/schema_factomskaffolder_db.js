@@ -50,11 +50,65 @@ export default init => {
 
     /**
       * ------------------------------------
-      * Identities
+      * Doctor
       * ------------------------------------
       */
-    class Identities extends Sequelize.Model{}
-    Identities.init({
+    class Doctor extends Sequelize.Model{}
+    Doctor.init({
+      _id: { 
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      
+      first_name: {
+        type: Sequelize.STRING, 
+        allowNull: false
+      },
+      
+      last_name: {
+        type: Sequelize.STRING
+      },
+      
+      speciality: {
+        type: Sequelize.STRING
+      },
+      
+      //RELATIONS
+        
+      identity:  {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Identity",
+          key: '_id',
+        },
+      }
+        
+      patient:  {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Patient",
+          key: '_id',
+        },
+      }
+      
+      
+      //EXTERNAL RELATIONS
+      /*
+      */
+    },
+      { sequelize, tableName: "doctor", timestamps: false }
+    );
+
+
+
+    /**
+      * ------------------------------------
+      * Identity
+      * ------------------------------------
+      */
+    class Identity extends Sequelize.Model{}
+    Identity.init({
       _id: { 
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -72,7 +126,7 @@ export default init => {
       },
       
       key_pairs: {
-        type: Sequelize.STRING
+        type: Custom
       },
       
       stage: {
@@ -81,13 +135,105 @@ export default init => {
       },
       
       //RELATIONS
+        
+      
+      
+      //EXTERNAL RELATIONS
+      /*
+      identity: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: Doctor,
+          key: '_id',
+        }
+      },
+      */
+    },
+      { sequelize, tableName: "identity", timestamps: false }
+    );
+
+
+
+    /**
+      * ------------------------------------
+      * Patient
+      * ------------------------------------
+      */
+    class Patient extends Sequelize.Model{}
+    Patient.init({
+      _id: { 
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      
+      condition: {
+        type: Sequelize.STRING
+      },
+      
+      first_name: {
+        type: Sequelize.STRING, 
+        allowNull: false
+      },
+      
+      last_name: {
+        type: Sequelize.STRING
+      },
+      
+      //RELATIONS
+        
+        
+      
+      
+      //EXTERNAL RELATIONS
+      /*
+      patient: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: Doctor,
+          key: '_id',
+        }
+      },
+      patient: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: Report,
+          key: '_id',
+        }
+      },
+      */
+    },
+      { sequelize, tableName: "patient", timestamps: false }
+    );
+
+
+
+    /**
+      * ------------------------------------
+      * Report
+      * ------------------------------------
+      */
+    class Report extends Sequelize.Model{}
+    Report.init({
+      _id: { 
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      
+      date: {
+        type: Sequelize.DATE
+      },
+      
+      //RELATIONS
+        
       
       
       //EXTERNAL RELATIONS
       /*
       */
     },
-      { sequelize, tableName: "identities", modelName: "Identities", timestamps: false }
+      { sequelize, tableName: "report", timestamps: false }
     );
 
 
@@ -134,7 +280,7 @@ export default init => {
       /*
       */
     },
-      { sequelize, tableName: "user", modelName: "User", timestamps: false }
+      { sequelize, tableName: "user", timestamps: false }
     );
 
 
@@ -145,6 +291,17 @@ export default init => {
       */
 
     
+    
+    
+    
+    Report.belongsToMany(Patient, {
+        through: "Report_patient",
+        as: "patient",
+        foreignKey: "id_Report",
+        otherKey: "id_Patient",
+        timestamps: false
+    });
+
     
   /**
    * ------------------------------------

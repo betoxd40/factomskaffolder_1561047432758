@@ -9,10 +9,31 @@ USE `factomskaffolder_db`;
 -- ENTITIES
 
 --
--- Struttura della tabella `identities`
+-- Struttura della tabella `doctor`
 --
 
-CREATE TABLE IF NOT EXISTS `identities` (
+CREATE TABLE IF NOT EXISTS `doctor` (
+	`first_name` varchar(130)  NOT NULL,
+	`last_name` varchar(130) ,
+	`speciality` varchar(130) ,
+	
+	-- RELAZIONI
+	`identity` int(11)  REFERENCES identity(_id),
+	`patient` int(11)  REFERENCES patient(_id),
+
+	`_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT 
+
+);
+
+
+
+
+
+--
+-- Struttura della tabella `identity`
+--
+
+CREATE TABLE IF NOT EXISTS `identity` (
 	`chain_id` varchar(130)  NOT NULL,
 	`entry_hash` varchar(130)  NOT NULL,
 	`key_pairs` varchar(30) ,
@@ -26,6 +47,49 @@ CREATE TABLE IF NOT EXISTS `identities` (
 
 
 
+
+
+--
+-- Struttura della tabella `patient`
+--
+
+CREATE TABLE IF NOT EXISTS `patient` (
+	`condition` varchar(130) ,
+	`first_name` varchar(130)  NOT NULL,
+	`last_name` varchar(130) ,
+	
+	-- RELAZIONI
+
+	`_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT 
+
+);
+
+
+
+
+
+--
+-- Struttura della tabella `report`
+--
+
+CREATE TABLE IF NOT EXISTS `report` (
+	`date` date ,
+	
+	-- RELAZIONI
+
+	`_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT 
+
+);
+
+
+
+
+-- relation m:m patient Report - Patient
+CREATE TABLE IF NOT EXISTS `Report_patient` (
+    `_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `id_Report` int(11)  NOT NULL REFERENCES Report(_id),
+    `id_Patient` int(11)  NOT NULL REFERENCES Patient(_id)
+);
 
 
 --

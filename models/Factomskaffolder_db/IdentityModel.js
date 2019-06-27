@@ -29,26 +29,25 @@
 * You will get 10% discount for each one of your friends
 * 
 */
-module.exports = {
-	factomskaffolder_db: {
-        name: "factomskaffolder_db",
-        user: "root",
-        password: "password",
-        host: "localhost",
-        port: 3306,
-        dialect: "mysql"
-    },
-    
-    factomConfig: {
-        baseUrl: "https://matisse.api.factom.com/v1",
-        accessToken: {
-            appId: "6b920ff0",
-            appKey: "f38a6298bd0515154174fc4fbfdbeb43"
-        },
-    },
+import IdentityModelGenerated from "./generated/IdentityModelGenerated";
 
-    publicPath: "../client/dist",
-	port: 3000,
-    tokenSecret: "Insert Your Secret Token",
-    api: "/api"
-}
+const customModel = {
+
+  /**
+   * Override here your custom queries
+   * EXAMPLE:
+   *
+   
+    async get(id) {
+      console.log("This is my custom query");
+      return await IdentityModelGenerated.getModel().findOne({ _id: id });
+    }
+
+   */
+
+};
+
+export default {
+  ...IdentityModelGenerated,
+  ...customModel
+};

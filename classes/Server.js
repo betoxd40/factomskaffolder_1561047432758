@@ -58,7 +58,10 @@ import SecurityController from "../controllers/SecurityController";
 import Database_Factomskaffolder_db from "./Database_Factomskaffolder_db.js";
 
 // Controllers
-import IdentitiesController from "../controllers/Factomskaffolder_db/IdentitiesController";
+import DoctorController from "../controllers/Factomskaffolder_db/DoctorController";
+import IdentityController from "../controllers/Factomskaffolder_db/IdentityController";
+import PatientController from "../controllers/Factomskaffolder_db/PatientController";
+import ReportController from "../controllers/Factomskaffolder_db/ReportController";
 import UserController from "../controllers/Factomskaffolder_db/UserController";
 
 // End Import Controllers
@@ -132,7 +135,10 @@ class Server {
     SecurityController.init(router);
 
     // Start Init Controllers
-		IdentitiesController.init(router);
+		DoctorController.init(router);
+		IdentityController.init(router);
+		PatientController.init(router);
+		ReportController.init(router);
 		UserController.init(router);
 		 // End Init Controllers
 
