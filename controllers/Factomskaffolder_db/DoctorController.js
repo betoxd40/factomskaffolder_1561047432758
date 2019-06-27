@@ -32,7 +32,6 @@ const generatedControllers = {
    */
   create: async (req, res) => {
     try {
-      console.log('el body es ', req.body);
       const result = await DoctorModel.create(req.body);
       res.json(result);
     } catch (err) {

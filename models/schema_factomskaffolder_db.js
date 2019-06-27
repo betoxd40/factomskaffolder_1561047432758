@@ -126,7 +126,7 @@ export default init => {
       },
       
       key_pairs: {
-        type: Sequelize.STRING, 
+        type: Sequelize.JSON, 
       },
       
       stage: {

@@ -24,6 +24,7 @@
     "jsonwebtoken": "^7.4.3",
     "mysql2": "^1.6.5",
     "nodemon": "^1.11.0",
+    "pg": "^7.11.0",
     "sequelize": "^5.8.6",
     "swagger-ui-express": "^2.0.15",
     "tracer": "^0.8.9",

@@ -25,7 +25,7 @@ const generatedModel = {
         names: [id],
       });
       let result = await Database.getConnection().models.Identity.create({
-        chain_id, entry_hash, key_pairs: key_pairs.toString(), stage
+        chain_id, entry_hash, key_pairs, stage
       });
       const insertedId = result.dataValues._id;
       return insertedId;

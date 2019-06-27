@@ -32,7 +32,8 @@ const generatedModel = {
   */
   async list() {
     try {
-      let result = await Database.getConnection().models.Doctor.findAll();
+      let result = await Database.getConnection().models.Identity.findAll();
+      const stringify = result.key_pairs;
       return result;
     } catch (e) {
       console.log(e);

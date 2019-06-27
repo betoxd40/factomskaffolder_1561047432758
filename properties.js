@@ -32,11 +32,11 @@
 module.exports = {
 	factomskaffolder_db: {
         name: "factomskaffolder_db",
-        user: "root",
+        user: "postgres",
         password: "password",
         host: "localhost",
-        port: 3306,
-        dialect: "mysql"
+        port: 5432,
+        dialect: "postgres"
     },
     
     factomConfig: {
