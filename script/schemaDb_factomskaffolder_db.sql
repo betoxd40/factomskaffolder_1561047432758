@@ -25,9 +25,16 @@ CREATE TABLE IF NOT EXISTS identity (
 	_id serial NOT NULL PRIMARY KEY
 );
 
+CREATE TABLE IF NOT EXISTS entry (
+	entry_hash varchar(130)  NOT NULL,
+	stage varchar(130) ,
 
+	-- RELAZIONI
+	chain int  REFERENCES chain(_id),
 
+	_id serial NOT NULL PRIMARY KEY
 
+);
 
 --
 -- Struttura della tabella `patient`
