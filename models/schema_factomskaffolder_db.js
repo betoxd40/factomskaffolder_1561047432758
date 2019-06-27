@@ -82,7 +82,7 @@ export default init => {
           model: "Identity",
           key: '_id',
         },
-      }
+      },
         
       patient:  {
         type: Sequelize.INTEGER,
