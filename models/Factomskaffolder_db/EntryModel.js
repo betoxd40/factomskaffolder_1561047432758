@@ -16,13 +16,14 @@ const generatedModel = {
   */
   create: async (chainId, signerPrivateKey, signerChainId, content, chain) => {
     try {
-      const { chain_id, entry_hash, stage } = await factomConnectSDK.chains.create({
+      const { entry_hash, stage } = await factomConnectSDK.chains.create({
+        chainId,
         signerPrivateKey,
         signerChainId,
         content,
       });
-      let result = await Database.getConnection().models.Chain.create({
-        chain_id, entry_hash, stage, identity,
+      let result = await Database.getConnection().models.Entry.create({
+        entry_hash, stage, chain,
       });
       return result;
     } catch(e) {
