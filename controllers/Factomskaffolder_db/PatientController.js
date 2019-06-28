@@ -21,6 +21,7 @@ const generatedControllers = {
     const baseUrl = `${Properties.api}/patient`;
     router.post(baseUrl + "", generatedControllers.create);
     router.get(baseUrl + "", generatedControllers.list);
+    router.delete(baseUrl + "/:id", generatedControllers.delete);
   },
 
 
@@ -47,14 +48,46 @@ const generatedControllers = {
    *
    */
   list: async (req, res) => {
-      try {
-        const result = await PatientModel.list();
-        res.json(result);
-      } catch (err) {
-        const safeErr = ErrorManager.getSafeError(err);
-        res.status(safeErr.status).json(safeErr);
-      }
-    },
+    try {
+      const result = await PatientModel.list();
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+
+  /**
+   * PatientModel.update
+   * @description CRUD ACTION update
+   * @param ObjectId id Id
+   *
+   */
+  update: async (req, res) => {
+    try {
+      const result = await PatientModel.update(req.body);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+    }
+  },
+
+  /**
+  * PatientModel.delete
+  * @description CRUD ACTION delete
+  * @param ObjectId id Id
+  *
+  */
+  delete: async (req, res) => {
+    try {
+      const result = await PatientModel.delete(req.params.id);
+      res.json(result);
+    } catch (err) {
+      const safeErr = ErrorManager.getSafeError(err);
+      res.status(safeErr.status).json(safeErr);
+  }
+},
    
 };
 

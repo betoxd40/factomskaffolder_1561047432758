@@ -122,3 +122,9 @@ You can customize your generator template working with files in .skaffolder fold
 
 Please refer to https://skaffolder.com/#/documentation/skaffolder-cli for more information.
 
+--------------
+## TODOS
+--------------
+
+- Error handler on the Models / Controllers
+- Handle all the models method on the controller

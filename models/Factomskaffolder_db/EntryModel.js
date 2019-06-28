@@ -37,9 +37,13 @@ const generatedModel = {
   *   @description CRUD ACTION list
   *
   */
-  async list() { 
-    let list = await Database.getConnection().models.Chain.findAll();
-    return list;
+  async list() {
+    try {
+      let list = await Database.getConnection().models.Chain.findAll();
+      return list;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
 };
