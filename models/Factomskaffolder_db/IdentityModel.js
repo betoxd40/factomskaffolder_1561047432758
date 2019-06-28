@@ -27,6 +27,7 @@ const generatedModel = {
       const insertedId = result.dataValues._id;
 
       // Create Audit and Management Chain
+      // TODO: this should be handled by the CONTROLLER
       const auditChain = await ChainModel.create(
         key_pairs[0].private_key, chain_id, "Audit Chain", insertedId,
       );

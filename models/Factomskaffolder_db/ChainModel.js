@@ -22,7 +22,7 @@ const generatedModel = {
         content,
       });
       let result = await Database.getConnection().models.Chain.create({
-        chain_id, entry_hash, stage, identity,
+        chain_id, entry_hash, stage, content, identity,
       });
       return result;
     } catch(e) {

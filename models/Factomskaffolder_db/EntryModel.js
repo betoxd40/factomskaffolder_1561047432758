@@ -8,10 +8,11 @@ const generatedModel = {
   
   /**
   * EntryModel.create
+  * @param chainId
   * @param signerPrivateKey
   * @param signerChainId
   * @param content
-  * @param identity
+  * @param chain
   * @description CRUD ACTION create
   */
   create: async (chainId, signerPrivateKey, signerChainId, content, chain) => {

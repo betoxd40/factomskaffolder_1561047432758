@@ -4,14 +4,11 @@ import IdentityModel from './IdentityModel';
 const generatedModel = {
 
   /**
-  * IdentityModel.create
+  * DoctorModel.create
   * @description CRUD ACTION create
-  * @param {[String]} names 
-  * @param {[String]=} keys 
-  * @param {String=} callbackUrl 
-  * @param {Object=} callbackStages 
-  * @param {Object=} accessToken 
-  * @param {String=} baseUrl 
+  * @param first_name
+  * @param last_name
+  * @param speciality
   */
   create: async ({first_name, last_name, speciality}) => {
     try{
@@ -26,14 +23,13 @@ const generatedModel = {
   },
 
   /**
-  * UserModel.list
+  * DoctorModel.list
   * @description CRUD ACTION list
   *
   */
   async list() {
     try {
-      let result = await Database.getConnection().models.Identity.findAll();
-      const stringify = result.key_pairs;
+      let result = await Database.getConnection().models.Doctor.findAll();
       return result;
     } catch (e) {
       console.log(e);

@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS patient (
 	last_name varchar(130) ,
 
 	-- RELAZIONI
+	doctor int  REFERENCES doctor(_id),
 
 	_id serial NOT NULL PRIMARY KEY
 

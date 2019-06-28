@@ -80,6 +80,10 @@ export default init => {
       stage: {
         type: Sequelize.STRING
       },
+
+      content: {
+        type: Sequelize.STRING
+      },
       
       //RELATIONS
         
@@ -96,6 +100,35 @@ export default init => {
       */
     },
       { sequelize, tableName: "chain", timestamps: false, modelName: "Chain" }
+    );
+
+    class Entry extends Sequelize.Model{}
+    Entry.init({
+      _id: { 
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      
+      entry_hash: {
+        type: Sequelize.STRING
+      },
+      
+      stage: {
+        type: Sequelize.STRING
+      },
+      
+      //RELATIONS
+        
+      chain:  {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Chain",
+          key: '_id',
+        },
+      },
+    },
+      { sequelize, tableName: "entry", timestamps: false, modelName: "Entry" }
     );
 
 
@@ -180,26 +213,14 @@ export default init => {
       
       //RELATIONS
         
-        
-      
-      
-      //EXTERNAL RELATIONS
-      /*
-      patient: {
+      doctor:  {
         type: Sequelize.INTEGER,
         references: {
-          model: Doctor,
+          model: "Doctor",
           key: '_id',
-        }
+        },
       },
-      patient: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: Report,
-          key: '_id',
-        }
-      },
-      */
+
     },
       { sequelize, tableName: "patient", timestamps: false, modelName: "Patient" }
     );
@@ -280,25 +301,6 @@ export default init => {
     },
       { sequelize, tableName: "user", timestamps: false, modelName: "User" }
     );
-
-
-    /**
-      * ------------------------------------
-      * Relations many to many
-      * ------------------------------------
-      */
-
-    
-    
-    
-    
-    Report.belongsToMany(Patient, {
-        through: "report_patient",
-        as: "patient",
-        foreignKey: "id_report",
-        otherKey: "id_patient",
-        timestamps: false
-    });
 
     
   /**
