@@ -21,6 +21,7 @@ const generatedControllers = {
     const baseUrl = `${Properties.api}/patient`;
     router.post(baseUrl + "", generatedControllers.create);
     router.get(baseUrl + "", generatedControllers.list);
+    router.put(baseUrl + "/:id", generatedControllers.update);
     router.delete(baseUrl + "/:id", generatedControllers.delete);
   },
 
@@ -65,7 +66,7 @@ const generatedControllers = {
    */
   update: async (req, res) => {
     try {
-      const result = await PatientModel.update(req.body);
+      const result = await PatientModel.update(req.params.id, req.body);
       res.json(result);
     } catch (err) {
       const safeErr = ErrorManager.getSafeError(err);

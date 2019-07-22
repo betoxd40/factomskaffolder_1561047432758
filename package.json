@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "canonical-json": "^0.0.4",
     "chalk": "^2.4.2",
     "cors": "^2.8.5",
     "esm": "^3.2.22",
@@ -26,6 +27,7 @@
     "nodemon": "^1.11.0",
     "pg": "^7.11.0",
     "sequelize": "^5.8.6",
+    "sha256": "^0.2.0",
     "swagger-ui-express": "^2.0.15",
     "tracer": "^0.8.9",
     "uuid": "^3.3.2",
