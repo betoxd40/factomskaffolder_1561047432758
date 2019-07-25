@@ -76,10 +76,6 @@ export default init => {
       entry_hash: {
         type: Sequelize.STRING
       },
-      
-      stage: {
-        type: Sequelize.STRING
-      },
 
       content: {
         type: Sequelize.STRING
@@ -113,8 +109,8 @@ export default init => {
       entry_hash: {
         type: Sequelize.STRING
       },
-      
-      stage: {
+
+      content: {
         type: Sequelize.STRING
       },
       
@@ -158,11 +154,6 @@ export default init => {
       
       key_pairs: {
         type: Sequelize.JSON, 
-      },
-      
-      stage: {
-        type: Sequelize.STRING, 
-        allowNull: false
       },
       
       //RELATIONS
@@ -239,14 +230,26 @@ export default init => {
         primaryKey: true,
         autoIncrement: true
       },
-      
-      date: {
-        type: Sequelize.DATE
+
+      description: {
+        type: Sequelize.STRING
       },
       
       //RELATIONS
-        
-      
+      doctor:  {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Doctor",
+          key: '_id',
+        },
+      },
+      patient:  {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Patient",
+          key: '_id',
+        },
+      },
       
       //EXTERNAL RELATIONS
       /*

@@ -14,17 +14,26 @@ const generatedModel = {
   * @param identity
   * @description CRUD ACTION create
   */
-  create: async (signerPrivateKey, signerChainId, content, identity) => {
+  create: async (signerPrivateKey, signerChainId, content, entryHash, identity,) => {
     try {
-      const { chain_id, entry_hash, stage } = await factomConnectSDK.chains.create({
-        signerPrivateKey,
-        signerChainId,
-        content,
-      });
-      let result = await Database.getConnection().models.Chain.create({
-        chain_id, entry_hash, stage, content, identity,
-      });
-      return result;
+      if(!signerPrivateKey) {
+        // Chain Management
+        let result = await Database.getConnection().models.Chain.create({
+          chain_id: signerChainId, entry_hash: entryHash, content, identity,
+        });
+        return result;
+      } else {
+        // Chain Audit
+        const { chain_id, entry_hash } = await factomConnectSDK.chains.create({
+          signerPrivateKey,
+          signerChainId,
+          content,
+        });
+        let result = await Database.getConnection().models.Chain.create({
+          chain_id, entry_hash, content, identity,
+        });
+        return result;
+      }
     } catch(e) {
       console.log(e);
     }
