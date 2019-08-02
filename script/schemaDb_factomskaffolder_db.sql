@@ -11,10 +11,40 @@ CREATE TABLE IF NOT EXISTS doctor (
 
 	-- RELAZIONI
 	identity int  REFERENCES identity(_id),
-	patient int  REFERENCES patient(_id),
 
 	_id serial NOT NULL PRIMARY KEY
 
+);
+
+--
+-- Table `patient`
+--
+
+CREATE TABLE IF NOT EXISTS patient (
+	condition varchar(130) ,
+	first_name varchar(130)  NOT NULL,
+	last_name varchar(130) ,
+
+	-- RELAZIONI
+	doctor int  REFERENCES doctor(_id),
+
+	_id serial NOT NULL PRIMARY KEY
+
+);
+
+--
+-- Table `report`
+--
+
+CREATE TABLE IF NOT EXISTS report (
+	description varchar(130),
+
+	-- RELAZIONI
+	
+	doctor int  REFERENCES doctor(_id),
+	patient int  REFERENCES patient(_id),
+
+	_id serial NOT NULL PRIMARY KEY
 );
 
 --
@@ -57,36 +87,7 @@ CREATE TABLE IF NOT EXISTS entry (
 
 );
 
---
--- Table `patient`
---
 
-CREATE TABLE IF NOT EXISTS patient (
-	condition varchar(130) ,
-	first_name varchar(130)  NOT NULL,
-	last_name varchar(130) ,
-
-	-- RELAZIONI
-	doctor int  REFERENCES doctor(_id),
-
-	_id serial NOT NULL PRIMARY KEY
-
-);
-
---
--- Table `report`
---
-
-CREATE TABLE IF NOT EXISTS report (
-	description varchar(130),
-
-	-- RELAZIONI
-	
-	doctor int  REFERENCES doctor(_id),
-	patient int  REFERENCES patient(_id),
-
-	_id serial NOT NULL PRIMARY KEY
-);
 
 
 --

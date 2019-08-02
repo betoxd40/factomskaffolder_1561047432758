@@ -8,26 +8,27 @@ module.exports = {
         dialect: "postgres"
     },
     
-    factomConfig: {
-        baseUrl: "https://matisse.api.factom.com/v1",
-        accessToken: {
-            appId: "6b920ff0",
-            appKey: "f38a6298bd0515154174fc4fbfdbeb43"
+    factom: {
+        config: {
+            baseUrl: "https://matisse.api.factom.com/v1",
+            accessToken: {
+                appId: "6b920ff0",
+                appKey: "f38a6298bd0515154174fc4fbfdbeb43"
+            },
         },
-    },
-
-    factomModel: {
-        Doctor: {
-            factomized: null,
-            has_identity: true,
-        },
-        Patient: {
-            factomized: 'Doctor',
-            has_identity: false,
-        },
-        Report: {
-            factomized: 'Doctor',
-            has_identity: false,
+        model: {
+            doctor: {
+                factomized: null,
+                has_identity: true,
+            },
+            patient: {
+                factomized: 'doctor',
+                has_identity: false,
+            },
+            report: {
+                factomized: 'doctor',
+                has_identity: false,
+            },
         },
     },
 

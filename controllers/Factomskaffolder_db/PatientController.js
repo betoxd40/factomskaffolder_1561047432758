@@ -1,4 +1,3 @@
-
 // Properties
 import Properties from "../../properties";
 
@@ -12,19 +11,20 @@ import { authorize } from "../../security/SecurityManager";
 import Errors from "../../classes/Errors";
 import ErrorManager from "../../classes/ErrorManager";
 
+// Middleware
+import { factomize } from "../../middlewares/factom";
+
 const generatedControllers = {
-  
   /**
    * Init routes
    */
   init: router => {
     const baseUrl = `${Properties.api}/patient`;
     router.post(baseUrl + "", generatedControllers.create);
-    router.get(baseUrl + "", generatedControllers.list);
+    router.get(baseUrl + "", generatedControllers.list, factomize);
     router.put(baseUrl + "/:id", generatedControllers.update);
     router.delete(baseUrl + "/:id", generatedControllers.delete);
   },
-
 
   // CRUD METHODS
 
@@ -48,10 +48,11 @@ const generatedControllers = {
    *   @description CRUD ACTION list
    *
    */
-  list: async (req, res) => {
+  list: async (req, res, next) => {
     try {
       const result = await PatientModel.list();
-      res.json(result);
+      next()
+      //res.json(result);
     } catch (err) {
       const safeErr = ErrorManager.getSafeError(err);
       res.status(safeErr.status).json(safeErr);
@@ -75,11 +76,11 @@ const generatedControllers = {
   },
 
   /**
-  * PatientModel.delete
-  * @description CRUD ACTION delete
-  * @param ObjectId id Id
-  *
-  */
+   * PatientModel.delete
+   * @description CRUD ACTION delete
+   * @param ObjectId id Id
+   *
+   */
   delete: async (req, res) => {
     try {
       const result = await PatientModel.delete(req.params.id);
@@ -87,12 +88,10 @@ const generatedControllers = {
     } catch (err) {
       const safeErr = ErrorManager.getSafeError(err);
       res.status(safeErr.status).json(safeErr);
+    }
   }
-},
-   
 };
 
 export default {
   ...generatedControllers
 };
-

@@ -4,7 +4,7 @@ import Database from "../../classes/Database_Factomskaffolder_db";
 import sha256 from 'sha256';
 import canonicalize from 'canonical-json';
 
-const factomConnectSDK = new Factom(Properties.factomConfig);
+const factomConnectSDK = new Factom(Properties.factom.config);
 
 const generatedModel = {
   

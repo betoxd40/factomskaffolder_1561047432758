@@ -10,11 +10,12 @@ const generatedModel = {
   * @param last_name
   * @param speciality
   */
-  create: async ({first_name, last_name, speciality}) => {
+  create: async ({first_name, last_name, speciality, identity_id = null}) => {
+    // If the factom identity service is disabled, the identity_id will be null
+    // otherwise, will receive the identity_id related to this model.
     try{
-      const id = await IdentityModel.create();
       let result = await Database.getConnection().models.Doctor.create({
-        first_name, last_name, speciality, identity: id,
+        first_name, last_name, speciality, identity: identity_id,
       });
       return result;
     } catch(e) {

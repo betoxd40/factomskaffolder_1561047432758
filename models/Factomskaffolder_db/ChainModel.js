@@ -2,7 +2,7 @@ import Properties from "../../properties";
 import Factom from "factom-harmony-connect"
 import Database from "../../classes/Database_Factomskaffolder_db";
 
-const factomConnectSDK = new Factom(Properties.factomConfig);
+const factomConnectSDK = new Factom(Properties.factom.config);
 
 const generatedModel = {
   

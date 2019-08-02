@@ -11,22 +11,23 @@ import { authorize } from "../../security/SecurityManager";
 import Errors from "../../classes/Errors";
 import ErrorManager from "../../classes/ErrorManager";
 
+// Middleware
+import { createIdentity } from "../../middlewares/factom";
+
 const generatedControllers = {
-  
   /**
    * Init routes
    */
   init: router => {
     const baseUrl = `${Properties.api}/doctor`;
-    router.post(baseUrl + "", generatedControllers.create);
+    router.post(baseUrl + "", createIdentity, generatedControllers.create);
     router.get(baseUrl + "", generatedControllers.list);
   },
-
 
   // CRUD METHODS
 
   /**
-   * DoctorModel.create
+   * DoctorController.create
    * @description CRUD ACTION create
    *
    */
@@ -41,11 +42,11 @@ const generatedControllers = {
   },
 
   /**
-   * DoctorModel.list
-   *   @description CRUD ACTION list
+   * DoctorController.list
+   * @description CRUD ACTION list
    *
    */
- list: async (req, res) => {
+  list: async (req, res) => {
     try {
       const result = await DoctorModel.list();
       res.json(result);
@@ -53,14 +54,9 @@ const generatedControllers = {
       const safeErr = ErrorManager.getSafeError(err);
       res.status(safeErr.status).json(safeErr);
     }
-  },
-
-  
-  // Custom APIs
-   
+  }
 };
 
 export default {
   ...generatedControllers
 };
-
