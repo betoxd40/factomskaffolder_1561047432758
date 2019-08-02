@@ -16,6 +16,21 @@ module.exports = {
         },
     },
 
+    factomModel: {
+        Doctor: {
+            factomized: null,
+            has_identity: true,
+        },
+        Patient: {
+            factomized: 'Doctor',
+            has_identity: false,
+        },
+        Report: {
+            factomized: 'Doctor',
+            has_identity: false,
+        },
+    },
+
     publicPath: "../client/dist",
 	port: 3000,
     tokenSecret: "Insert Your Secret Token",
