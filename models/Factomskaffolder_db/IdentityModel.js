@@ -2,10 +2,13 @@ import Properties from "../../properties";
 import Factom from "factom-harmony-connect";
 import Database from "../../classes/Database_Factomskaffolder_db";
 import ChainModel from "./ChainModel";
+import Errors from "../../classes/Errors";
 import uuid from "uuid/v1";
 
 const factomConnectSDK = new Factom(Properties.factom.config);
 
+
+//TODO; manejar cuando se te acaba el limite
 const generatedModel = {
   /**
    * IdentityModel.create
@@ -51,7 +54,11 @@ const generatedModel = {
       // Return the id inserted
       return insertedId;
     } catch (e) {
-      console.log(e);
+      if(e.response.status === 403){
+        throw new Errors.INVALID_AUTH_FACTOM();
+      } else if (e.response.status === 429){
+        throw new Errors.EXCEDEED_LIMIT_REQUEST()
+      }
     }
   },
 

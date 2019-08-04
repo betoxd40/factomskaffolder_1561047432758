@@ -11,8 +11,8 @@ import { authorize } from "../../security/SecurityManager";
 import Errors from "../../classes/Errors";
 import ErrorManager from "../../classes/ErrorManager";
 
-// Middleware
-import { factomize } from "../../middlewares/factom";
+// Services
+import { factomize, getRelationIdentityId } from "../../services/factom";
 
 const generatedControllers = {
   /**
@@ -21,7 +21,7 @@ const generatedControllers = {
   init: router => {
     const baseUrl = `${Properties.api}/patient`;
     router.post(baseUrl + "", generatedControllers.create);
-    router.get(baseUrl + "", generatedControllers.list, factomize);
+    router.get(baseUrl + "", generatedControllers.list);
     router.put(baseUrl + "/:id", generatedControllers.update);
     router.delete(baseUrl + "/:id", generatedControllers.delete);
   },
@@ -35,6 +35,9 @@ const generatedControllers = {
    */
   create: async (req, res) => {
     try {
+      // Factom method
+      await factomize("Patient", req.body, "POST", "doctor");
+
       const result = await PatientModel.create(req.body);
       res.json(result);
     } catch (err) {
@@ -51,14 +54,13 @@ const generatedControllers = {
   list: async (req, res, next) => {
     try {
       const result = await PatientModel.list();
-      next()
-      //res.json(result);
+      res.json(result);
     } catch (err) {
       const safeErr = ErrorManager.getSafeError(err);
       res.status(safeErr.status).json(safeErr);
     }
   },
-
+  
   /**
    * PatientModel.update
    * @description CRUD ACTION update
@@ -67,6 +69,8 @@ const generatedControllers = {
    */
   update: async (req, res) => {
     try {
+      // Factom methods
+      await factomize("Patient", req.body, "PUT", "doctor", req.params.id);
       const result = await PatientModel.update(req.params.id, req.body);
       res.json(result);
     } catch (err) {
@@ -83,6 +87,9 @@ const generatedControllers = {
    */
   delete: async (req, res) => {
     try {
+      // Factom methods
+      await factomize("Patient", req.body, "DELETE", "doctor", req.params.id);
+
       const result = await PatientModel.delete(req.params.id);
       res.json(result);
     } catch (err) {

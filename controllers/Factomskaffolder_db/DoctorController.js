@@ -12,7 +12,7 @@ import Errors from "../../classes/Errors";
 import ErrorManager from "../../classes/ErrorManager";
 
 // Middleware
-import { createIdentity } from "../../middlewares/factom";
+import { createIdentity } from "../../services/factom";
 
 const generatedControllers = {
   /**
@@ -20,7 +20,7 @@ const generatedControllers = {
    */
   init: router => {
     const baseUrl = `${Properties.api}/doctor`;
-    router.post(baseUrl + "", createIdentity, generatedControllers.create);
+    router.post(baseUrl + "", generatedControllers.create);
     router.get(baseUrl + "", generatedControllers.list);
   },
 
@@ -33,6 +33,10 @@ const generatedControllers = {
    */
   create: async (req, res) => {
     try {
+      // Factom method
+      const identityId = await createIdentity();
+      req.body['identity'] = identityId;
+
       const result = await DoctorModel.create(req.body);
       res.json(result);
     } catch (err) {
