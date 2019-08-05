@@ -11,47 +11,6 @@ CREATE TABLE IF NOT EXISTS doctor (
 
 	-- RELAZIONI
 	identity int  REFERENCES identity(_id),
-	patient int  REFERENCES patient(_id),
-
-	_id serial NOT NULL PRIMARY KEY
-
-);
-
---
--- Table `identity`
---
-
-CREATE TABLE IF NOT EXISTS identity (
-	chain_id varchar(130)  NOT NULL,
-	entry_hash varchar(130)  NOT NULL,
-	key_pairs json,
-	stage varchar(130)  NOT NULL,
-	_id serial NOT NULL PRIMARY KEY
-);
-
---
--- Table `chain`
---
-
-CREATE TABLE IF NOT EXISTS chain (
-	chain_id varchar(130)  NOT NULL,
-	entry_hash varchar(130)  NOT NULL,
-	identity int  REFERENCES identity(_id),
-	_id serial NOT NULL PRIMARY KEY
-	content varchar(130)  NOT NULL,
-
-);
-
---
--- Table `entry`
---
-
-CREATE TABLE IF NOT EXISTS entry (
-	entry_hash varchar(130)  NOT NULL,
-	content varchar(130)  NOT NULL,
-
-	-- RELAZIONI
-	chain int  REFERENCES chain(_id),
 
 	_id serial NOT NULL PRIMARY KEY
 
@@ -87,6 +46,47 @@ CREATE TABLE IF NOT EXISTS report (
 
 	_id serial NOT NULL PRIMARY KEY
 );
+
+--
+-- Table `identity`
+--
+
+CREATE TABLE IF NOT EXISTS identity (
+	chain_id varchar(260)  NOT NULL,
+	entry_hash varchar(260)  NOT NULL,
+	key_pairs json,
+	_id serial NOT NULL PRIMARY KEY
+);
+
+--
+-- Table `chain`
+--
+
+CREATE TABLE IF NOT EXISTS chain (
+	chain_id varchar(260)  NOT NULL,
+	entry_hash varchar(260)  NOT NULL,
+	identity int  REFERENCES identity(_id),
+	_id serial NOT NULL PRIMARY KEY
+	content varchar(260)  NOT NULL,
+
+);
+
+--
+-- Table `entry`
+--
+
+CREATE TABLE IF NOT EXISTS entry (
+	entry_hash varchar(260)  NOT NULL,
+	content varchar(260)  NOT NULL,
+
+	-- RELAZIONI
+	chain int  REFERENCES chain(_id),
+
+	_id serial NOT NULL PRIMARY KEY
+
+);
+
+
 
 
 --

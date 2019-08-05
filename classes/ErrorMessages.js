@@ -47,7 +47,17 @@ const ErrorMessages = Object.freeze({
   PWD_ADMIN_NOT_VALID: { status: 500, message: "Password admin not valid" },
   INVALID_LOGIN: { status: 401, message: "Not Authorized" },
   INVALID_BODY: { status: 400, message: "Invalid JSON body" },
-  INVALID_QUERY: { status: 400, message: "Invalid query string" }
+  INVALID_QUERY: { status: 400, message: "Invalid query string" },
+
+  // FACTOM
+  INVALID_MODEL: { status: 400, message: "Invalid Model" },
+  INVALID_CURRENT_MODEL_ID: { status: 400, message: "Invalid ID Model, can't be null / or wrong" },
+  IDENTITY_MODEL_FK_NOT_VALID: { status: 400, message: "The relation of the current model doesn't have an identity" },
+  INVALID_HTTP_METHOD: { status: 400, message: "HTTP method not supported, current http methods supported: POST, PUT, DELETE, PATCH" },
+  INVALID_IDENTITY_MODEL_FK: { status: 400, message: "Your current model FK who is related to the identity can't be null / or wrong, please check the name." },
+  INVALID_AUTH_FACTOM: { status: 403, message: "Factom Authentication Failed, please check your credentials" },
+  EXCEDEED_LIMIT_REQUEST: { status: 429, message: "Requests exceeded, please update your credentials" },
+
 });
 
 export default ErrorMessages;

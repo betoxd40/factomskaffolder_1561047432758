@@ -4,7 +4,7 @@ import Database from "../../classes/Database_Factomskaffolder_db";
 import sha256 from 'sha256';
 import canonicalize from 'canonical-json';
 
-const factomConnectSDK = new Factom(Properties.factomConfig);
+const factomConnectSDK = new Factom(Properties.factom.config);
 
 const generatedModel = {
   
@@ -21,18 +21,22 @@ const generatedModel = {
     try {
       // Convert the model content into a hash
       const content = sha256(canonicalize(modelContent));
-      const test = await factomConnectSDK.chains.entries.create({
+      const entry = await factomConnectSDK.chains.entries.create({
         chainId,
         signerPrivateKey,
         signerChainId,
         content,
       });
       let result = await Database.getConnection().models.Entry.create({
-        entry_hash: test.entry_hash, chain, content
+        entry_hash: entry.entry_hash, chain, content
       });
       return result;
     } catch(e) {
-      console.log(e);
+      if (e.response.status === 403) {
+        throw new Errors.INVALID_AUTH_FACTOM();
+      } else if (e.response.status === 429) {
+        throw new Errors.EXCEDEED_LIMIT_REQUEST()
+      }
     }
   },
 

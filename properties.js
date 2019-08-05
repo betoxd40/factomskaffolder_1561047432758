@@ -2,17 +2,33 @@ module.exports = {
 	factomskaffolder_db: {
         name: "factomskaffolder_db",
         user: "postgres",
-        password: "password",
+        password: "",
         host: "localhost",
         port: 5432,
         dialect: "postgres"
     },
     
-    factomConfig: {
-        baseUrl: "https://matisse.api.factom.com/v1",
-        accessToken: {
-            appId: "6b920ff0",
-            appKey: "f38a6298bd0515154174fc4fbfdbeb43"
+    factom: {
+        config: {
+            baseUrl: "FACTOM_BASE_URL",
+            accessToken: {
+                appId: "FACTOM_APP_ID",
+                appKey: "FACTOM_APP_KEY"
+            },
+        },
+        model: {
+            Doctor: {
+                factomized: null,
+                has_identity: true,
+            },
+            Patient: {
+                factomized: 'Doctor', // This should be the same model name as we have in the model document.
+                has_identity: false,
+            },
+            Report: {
+                factomized: 'Doctor', // This should be the same model name as we have in the model document.
+                has_identity: false,
+            },
         },
     },
 

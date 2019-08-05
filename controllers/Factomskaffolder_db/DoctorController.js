@@ -11,8 +11,10 @@ import { authorize } from "../../security/SecurityManager";
 import Errors from "../../classes/Errors";
 import ErrorManager from "../../classes/ErrorManager";
 
+// Middleware
+import { createIdentity } from "../../services/factom";
+
 const generatedControllers = {
-  
   /**
    * Init routes
    */
@@ -22,16 +24,19 @@ const generatedControllers = {
     router.get(baseUrl + "", generatedControllers.list);
   },
 
-
   // CRUD METHODS
 
   /**
-   * DoctorModel.create
+   * DoctorController.create
    * @description CRUD ACTION create
    *
    */
   create: async (req, res) => {
     try {
+      // Factom method
+      const identityId = await createIdentity();
+      req.body['identity'] = identityId;
+
       const result = await DoctorModel.create(req.body);
       res.json(result);
     } catch (err) {
@@ -41,11 +46,11 @@ const generatedControllers = {
   },
 
   /**
-   * DoctorModel.list
-   *   @description CRUD ACTION list
+   * DoctorController.list
+   * @description CRUD ACTION list
    *
    */
- list: async (req, res) => {
+  list: async (req, res) => {
     try {
       const result = await DoctorModel.list();
       res.json(result);
@@ -53,14 +58,9 @@ const generatedControllers = {
       const safeErr = ErrorManager.getSafeError(err);
       res.status(safeErr.status).json(safeErr);
     }
-  },
-
-  
-  // Custom APIs
-   
+  }
 };
 
 export default {
   ...generatedControllers
 };
-

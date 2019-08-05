@@ -2,7 +2,7 @@ import Properties from "../../properties";
 import Factom from "factom-harmony-connect"
 import Database from "../../classes/Database_Factomskaffolder_db";
 
-const factomConnectSDK = new Factom(Properties.factomConfig);
+const factomConnectSDK = new Factom(Properties.factom.config);
 
 const generatedModel = {
   
@@ -35,7 +35,11 @@ const generatedModel = {
         return result;
       }
     } catch(e) {
-      console.log(e);
+      if (e.response.status === 403) {
+        throw new Errors.INVALID_AUTH_FACTOM();
+      } else if (e.response.status === 429) {
+        throw new Errors.EXCEDEED_LIMIT_REQUEST()
+      }
     }
   },
 
