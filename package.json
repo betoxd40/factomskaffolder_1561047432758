@@ -22,7 +22,7 @@
     "extend": "^3.0.1",
     "factom-harmony-connect": "^1.1.0",
     "helmet": "^3.16.0",
-    "jsonwebtoken": "^7.4.3",
+    "jsonwebtoken": "^9.0.0",
     "mysql2": "^1.6.5",
     "nodemon": "^1.11.0",
     "pg": "^7.11.0",
